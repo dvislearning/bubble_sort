@@ -6,16 +6,13 @@ def bubble_sort(arr)
     completed = true
 	arr.each_with_index do |num, index|
 		if (num <=> arr[index+1]) == 1
-          unless arr[index+1] == nil
-            current = num
-            arr[index] = arr[index+1]
-            arr[index+1] = current
+          break if arr[index+1] == nil
+            arr[index], arr[index+1] = arr[index+1], num
             completed = false
-          end
 		end
 	end
   end
 	arr
 end
 
-bubble_sort(numbers).inspect 
+puts bubble_sort(numbers).inspect 
