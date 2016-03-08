@@ -1,5 +1,3 @@
-numbers = [4,3,78,2,0,21,55,5,78,9,21,22,23,24,20,15,12,-100,-3]
-
 def bubble_sort(arr)
   completed = false #Checks to see if all elements are sorted or if another iteration is needed.
   while completed ==  false
@@ -15,4 +13,21 @@ def bubble_sort(arr)
 	arr
 end
 
-puts bubble_sort(numbers).inspect 
+#Please enter block argument as { |left, right| left.length - right.length}
+
+def bubble_sort_by(arr,&code_block)
+  completed = false
+  while completed ==  false
+    completed = true
+    arr.each_with_index do |left, right|
+      break if arr[right+1] == nil
+      diff = code_block.call(left, arr[right+1])
+      diff = diff < 0? -1 :(diff > 0? 1: (0))
+      if diff == 1
+            arr[right], arr[right+1] = arr[right+1], left
+            completed = false
+        end
+    end
+  end
+  arr
+end
